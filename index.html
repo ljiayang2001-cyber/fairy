@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Fairy🌲💦">
+<meta name="theme-color" content="#2f6b4f">
+<title>Fairy🌲💦 个人成长工作台</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- 顶部 Logo 头部 -->
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-emoji">🌲</span>
+      <div class="logo-text">
+        <h1>Fairy<span class="logo-sub">🌲💦</span></h1>
+        <p>个人成长工作台 · 大秘</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="openSidebar" aria-label="菜单">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- 今日激励卡片 -->
+  <section class="quote-card">
+    <div class="quote-line">拖进行中，做想做的「事」</div>
+    <div class="quote-line">遇见合光</div>
+  </section>
+
+  <!-- 顶部统计 -->
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-emoji">🔥</div>
+      <div class="stat-num" id="statCheckin">0</div>
+      <div class="stat-label">连续打卡天数</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-emoji">✅</div>
+      <div class="stat-num" id="statDone">0</div>
+      <div class="stat-label">今日完成</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-emoji">⏳</div>
+      <div class="stat-num" id="statTodo">0</div>
+      <div class="stat-label">今日待办</div>
+    </div>
+  </section>
+
+  <!-- 本周统计 -->
+  <section class="week-stats">
+    <div class="week-title">📊 本周数据</div>
+    <div class="week-grid">
+      <div class="week-item">
+        <div class="week-num" id="weekDays">0</div>
+        <div class="week-label">坚持打卡 / 7 天</div>
+      </div>
+      <div class="week-item">
+        <div class="week-num" id="weekRate">0%</div>
+        <div class="week-label">本周完成率</div>
+      </div>
+      <div class="week-item">
+        <div class="week-num" id="weekPending">0</div>
+        <div class="week-label">待完成事项</div>
+      </div>
+    </div>
+    <div class="week-bar">
+      <div class="week-bar-inner" id="weekBar"></div>
+    </div>
+  </section>
+
+  <!-- 12 个模块导航卡片 -->
+  <section class="modules">
+    <h2 class="section-title">✨ 功能模块</h2>
+    <div class="module-grid" id="moduleGrid">
+      <!-- 由 JS 渲染 -->
+    </div>
+  </section>
+
+  <!-- 主内容区：12 个模块面板 -->
+  <main class="main-content">
+
+    <!-- 1. 每日计划 -->
+    <section class="panel" data-panel="plan">
+      <div class="panel-head">
+        <span class="panel-emoji">📋</span>
+        <h2>每日计划</h2>
+      </div>
+      <div class="plan-input-row">
+        <input type="text" id="planInput" placeholder="今天要做什么？回车添加">
+        <button class="btn-primary" id="addPlanBtn">添加</button>
+      </div>
+      <ul class="todo-list" id="planList"></ul>
+    </section>
+
+    <!-- 2. 英语学习 -->
+    <section class="panel" data-panel="english">
+      <div class="panel-head"><span class="panel-emoji">🌍</span><h2>英语学习</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="engInput" placeholder="单词 / 短语 / 句子">
+        <input type="text" id="engMeaning" placeholder="中文释义">
+        <button class="btn-primary" id="addEngBtn">添加</button>
+      </div>
+      <ul class="card-list" id="engList"></ul>
+    </section>
+
+    <!-- 3. 西语学习 -->
+    <section class="panel" data-panel="spanish">
+      <div class="panel-head"><span class="panel-emoji">🇪🇸</span><h2>西语学习</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="spInput" placeholder="Palabra / Frase">
+        <input type="text" id="spMeaning" placeholder="中文释义">
+        <button class="btn-primary" id="addSpBtn">添加</button>
+      </div>
+      <ul class="card-list" id="spList"></ul>
+    </section>
+
+    <!-- 4. 剪辑创作 -->
+    <section class="panel" data-panel="video">
+      <div class="panel-head"><span class="panel-emoji">🎬</span><h2>剪辑创作</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="vidTitle" placeholder="作品名称">
+        <select id="vidStatus">
+          <option value="选题">选题</option>
+          <option value="脚本">脚本</option>
+          <option value="拍摄">拍摄</option>
+          <option value="剪辑">剪辑</option>
+          <option value="发布">发布</option>
+          <option value="完成">完成</option>
+        </select>
+        <button class="btn-primary" id="addVidBtn">添加</button>
+      </div>
+      <ul class="card-list" id="vidList"></ul>
+    </section>
+
+    <!-- 5. PS AI 设计创作 -->
+    <section class="panel" data-panel="psai">
+      <div class="panel-head"><span class="panel-emoji">🎨</span><h2>PS AI 设计创作</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="psTitle" placeholder="设计项目">
+        <select id="psStatus">
+          <option value="灵感">灵感</option>
+          <option value="草图">草图</option>
+          <option value="设计中">设计中</option>
+          <option value="修改">修改</option>
+          <option value="完成">完成</option>
+        </select>
+        <button class="btn-primary" id="addPsBtn">添加</button>
+      </div>
+      <ul class="card-list" id="psList"></ul>
+    </section>
+
+    <!-- 6. 运动健身打卡 -->
+    <section class="panel" data-panel="sport">
+      <div class="panel-head"><span class="panel-emoji">🏃</span><h2>运动健身打卡</h2></div>
+      <div class="checkin-row">
+        <button class="btn-checkin" id="checkinBtn">今日打卡 ✓</button>
+        <span id="checkinStatus"></span>
+      </div>
+      <div class="plan-input-row">
+        <input type="text" id="sportInput" placeholder="运动项目（如：跑步 3km）">
+        <select id="sportStatus">
+          <option value="未开始">未开始</option>
+          <option value="进行中">进行中</option>
+          <option value="已完成">已完成</option>
+        </select>
+        <button class="btn-primary" id="addSportBtn">添加</button>
+      </div>
+      <ul class="card-list" id="sportList"></ul>
+    </section>
+
+    <!-- 7. 读书板块 -->
+    <section class="panel" data-panel="book">
+      <div class="panel-head"><span class="panel-emoji">📚</span><h2>读书板块</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="bookInput" placeholder="书名">
+        <input type="text" id="bookAuthor" placeholder="作者">
+        <button class="btn-primary" id="addBookBtn">添加</button>
+      </div>
+      <ul class="card-list" id="bookList"></ul>
+    </section>
+
+    <!-- 8. 电影电视板块 -->
+    <section class="panel" data-panel="movie">
+      <div class="panel-head"><span class="panel-emoji">🎬</span><h2>电影电视板块</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="mvInput" placeholder="影视名称">
+        <select id="mvType">
+          <option value="电影">电影</option>
+          <option value="剧集">剧集</option>
+          <option value="纪录片">纪录片</option>
+          <option value="综艺">综艺</option>
+        </select>
+        <select id="mvStatus">
+          <option value="想看">想看</option>
+          <option value="在看">在看</option>
+          <option value="已看">已看</option>
+        </select>
+        <button class="btn-primary" id="addMvBtn">添加</button>
+      </div>
+      <ul class="card-list" id="mvList"></ul>
+    </section>
+
+    <!-- 9. 学习资源广场 -->
+    <section class="panel" data-panel="resource">
+      <div class="panel-head"><span class="panel-emoji">🛍️</span><h2>学习资源广场</h2></div>
+      <div class="plan-input-row">
+        <input type="text" id="resTitle" placeholder="资源名称">
+        <input type="text" id="resLink" placeholder="链接（可选）">
+        <select id="resCategory">
+          <option value="课程">课程</option>
+          <option value="书籍">书籍</option>
+          <option value="工具">工具</option>
+          <option value="网站">网站</option>
+          <option value="公众号">公众号</option>
+          <option value="其他">其他</option>
+        </select>
+        <button class="btn-primary" id="addResBtn">添加</button>
+      </div>
+      <ul class="card-list" id="resList"></ul>
+    </section>
+
+    <!-- 10. 每日学习汇报 -->
+    <section class="panel" data-panel="report">
+      <div class="panel-head"><span class="panel-emoji">📰</span><h2>每日学习汇报</h2></div>
+      <textarea id="reportText" rows="6" placeholder="今日学到了什么？反思与总结..."></textarea>
+      <div class="plan-input-row">
+        <button class="btn-primary" id="saveReportBtn">保存今日汇报</button>
+        <select id="reportDate"></select>
+      </div>
+      <ul class="card-list" id="reportList"></ul>
+    </section>
+
+    <!-- 11. 心情日记 -->
+    <section class="panel" data-panel="mood">
+      <div class="panel-head"><span class="panel-emoji">💭</span><h2>心情日记</h2></div>
+      <div class="mood-row">
+        <label>心情：</label>
+        <div class="mood-picker" id="moodPicker">
+          <span data-mood="😊">😊</span>
+          <span data-mood="😄">😄</span>
+          <span data-mood="😌">😌</span>
+          <span data-mood="😐">😐</span>
+          <span data-mood="😔">😔</span>
+          <span data-mood="😢">😢</span>
+          <span data-mood="😡">😡</span>
+          <span data-mood="🥰">🥰</span>
+        </div>
+      </div>
+      <textarea id="moodText" rows="4" placeholder="记录今天的心情与想法..."></textarea>
+      <button class="btn-primary block" id="saveMoodBtn">保存心情日记</button>
+      <ul class="card-list" id="moodList"></ul>
+    </section>
+
+    <!-- 12. 每周复盘 -->
+    <section class="panel" data-panel="review">
+      <div class="panel-head"><span class="panel-emoji">📝</span><h2>每周复盘</h2></div>
+      <div class="plan-input-row">
+        <select id="reviewWeek"></select>
+        <button class="btn-primary" id="newReviewBtn">新建本周复盘</button>
+      </div>
+      <textarea id="reviewHighlight" rows="3" placeholder="本周亮点 ✨"></textarea>
+      <textarea id="reviewProblem" rows="3" placeholder="本周问题 ⚠️"></textarea>
+      <textarea id="reviewNext" rows="3" placeholder="下周计划 🎯"></textarea>
+      <button class="btn-primary block" id="saveReviewBtn">保存复盘</button>
+      <ul class="card-list" id="reviewList"></ul>
+    </section>
+
+  </main>
+
+  <!-- 侧边栏 -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <span class="logo-emoji">🌲</span>
+      <div>
+        <div class="sb-title">Fairy</div>
+        <div class="sb-sub">个人成长工作台 · 大秘</div>
+      </div>
+    </div>
+    <nav class="sb-nav" id="sidebarNav"></nav>
+    <div class="sb-foot">
+      <button class="btn-ghost" id="exportBtn">📦 导出数据</button>
+      <button class="btn-ghost" id="importBtn">📥 导入数据</button>
+      <button class="btn-ghost danger" id="clearBtn">🗑️ 清空所有</button>
+    </div>
+  </aside>
+  <div class="mask" id="mask"></div>
+
+  <!-- 浮动新建按钮 -->
+  <button class="fab" id="fab" title="新建">
+    <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+  </button>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
